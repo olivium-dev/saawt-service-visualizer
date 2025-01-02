@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Microservices Diagram</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Olivium - Microservice Visualizer</h1>
+  </header>
+
+  <!-- The container for our SVG visualization -->
+  <div id="visualizationArea">
+    <svg id="diagram" style="overflow: visible;">
+      <!-- Arrowhead Definition in <defs> -->
+      <defs>
+        <marker
+            id="arrowhead"
+            markerWidth="6"
+            markerHeight="4.2"
+            refX="6"
+            refY="2.1"
+            orient="auto"
+            >
+  <path d="M0,0 L0,4.2 L6,2.1 z" fill="white" />
+</marker>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Floating scenario filter panel -->
+  <div id="scenarioPanel">
+    <div id="scenarioPanelHeader">Scenarios</div>
+    <div id="scenarioSearch">
+      <input type="text" id="scenarioFilterInput" placeholder="Filter scenarios..." />
+    </div>
+    
+    <!-- The missing container for "All flows" checkbox -->
+    <div id="scenarioAllFlowsContainer"></div>
+
+    <!-- Scenario checkboxes go here -->
+    <div id="scenarioList"></div>
+  </div>
+
+  <!-- Step Popup Template -->
+  <template id="stepPopupTemplate">
+    <div class="step-popup">
+      <div class="popup-header">
+        <span class="popup-step"></span>
+        <button class="popup-close-btn">&times;</button>
+      </div>
+      <div class="popup-body">
+        <p><strong>Description:</strong> <span class="popup-description"></span></p>
+        <div class="popup-request">
+          <strong>Request:</strong>
+          <div><strong>Method:</strong> <span class="popup-req-method"></span></div>
+          <div><strong>URL:</strong> <span class="popup-req-url"></span></div>
+          <div><strong>Headers:</strong> <pre class="popup-req-headers"></pre></div>
+          <div><strong>Body:</strong> <pre class="popup-req-body"></pre></div>
+        </div>
+        <div class="popup-response">
+          <strong>Response:</strong>
+          <div><strong>Status Code:</strong> <span class="popup-res-status"></span></div>
+          <div><strong>Body:</strong> <pre class="popup-res-body"></pre></div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- The popup container (hidden by default). We'll clone from the template and place here -->
+  <div id="stepPopupContainer" style="position: fixed; display: none;"></div>
+
+  <!-- Scripts: controllers, data, etc. -->
+  <script src="data/controllers/orderPlacementFlow.js"></script>
+  <script src="data/controllers/refundFlow.js"></script>
+  <script src="data/data.js"></script>
+  <script src="data/loadControllers.js"></script>
+
+  <script src="arrowVariation.js"></script>
+  <script src="pathUtils.js"></script>
+  <script src="diagramUtils.js"></script>
+  <script src="collision.js"></script>
+  <script src="main.js"></script>
+  <script src="scenarioFilter.js"></script>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> Olivium. All rights reserved. | Author: Ouday Khaled</p>
+  </footer>
+
+  <!-- Simple script to auto-fill current year in footer -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
